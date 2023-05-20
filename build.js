@@ -2702,6 +2702,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
   loadSprite("bunny", "sprites/bunny.png");
   loadSprite("tree", "sprites/tree.png");
   scene("game", () => {
+    score = 0;
     const bunny = add([
       sprite("bunny"),
       area({ scale: 0.8 }),
@@ -2777,22 +2778,24 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       origin("center")
     ]);
     add([
-      text(`Press "space" or "click" to restart`),
-      pos(width() / 2, height() / 2 + 80),
-      origin("center"),
-      scale(0.5)
-    ]);
-    add([
       text("Game Over, your score: " + score),
       pos(center()),
       origin("center"),
       scale(0.8)
     ]);
-    onKeyPress("space", () => {
-      go("game");
+    wait(0.5, () => {
+      add([
+        text(`Press "space" or "click" to restart`),
+        pos(width() / 2, height() / 2 + 80),
+        origin("center"),
+        scale(0.5)
+      ]);
+      onKeyPress("space", () => {
+        go("game");
+      });
+      onClick(() => go("game"));
+      onTouchStart(() => go("game"));
     });
-    onClick(() => go("game"));
-    onTouchStart(() => go("game"));
   });
   scene("start", () => {
     add([

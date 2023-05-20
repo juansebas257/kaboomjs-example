@@ -8,7 +8,7 @@ const VERSION = '1.0.5';
 
 const FLOOR_HEIGHT = 48;
 const JUMP_FORCE = 800;
-const SPEED = 480;
+let SPEED = 480;
 
 let score = 0;
 test = [
@@ -20,6 +20,8 @@ loadSprite("tree", "sprites/tree.png");
 
 //scenes
 scene("game", () => {
+    score = 0;
+
     const bunny = add([
         sprite("bunny"),
         area({ scale: 0.8 }),
@@ -100,6 +102,19 @@ scene("game", () => {
         score++;
         scoreLabel.text = score;
     });
+
+    // it wasn't a good idea
+    /*
+    function increaseSpeed() {
+        wait(5, () => {
+        SPEED += 100;
+            increaseSpeed();
+        });
+    }
+
+    increaseSpeed();
+    */
+
 });
 
 scene("lose", () => {
@@ -111,13 +126,6 @@ scene("lose", () => {
     ]);
 
     add([
-        text(`Press "space" or "click" to restart`),
-        pos(width() / 2, height() / 2 + 80),
-        origin("center"),
-        scale(0.5),
-    ]);
-
-    add([
         text("Game Over, your score: " + score),
         pos(center()),
         origin("center"),
@@ -125,14 +133,23 @@ scene("lose", () => {
     ]);
 
 
-    //keymaps
-    onKeyPress("space", () => {
-        go("game");
+    wait(0.5, () => {
+        add([
+            text(`Press "space" or "click" to restart`),
+            pos(width() / 2, height() / 2 + 80),
+            origin("center"),
+            scale(0.5),
+        ]);
+
+        //keymaps
+        onKeyPress("space", () => {
+            go("game");
+        });
+
+        onClick(() => go("game"));
+
+        onTouchStart(() => go("game"));
     });
-
-    onClick(() => go("game"));
-
-    onTouchStart(() => go("game"));
 });
 
 scene("start", () => {
@@ -145,7 +162,7 @@ scene("start", () => {
 
     add([
         text(VERSION),
-        pos(width() -200, height()- 100),
+        pos(width() - 200, height() - 100),
         scale(0.5)
     ]);
 
