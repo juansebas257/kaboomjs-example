@@ -4,6 +4,8 @@ kaboom({
     background: [0, 100, 150]
 });
 
+const VERSION = '1.0.5';
+
 const FLOOR_HEIGHT = 48;
 const JUMP_FORCE = 800;
 const SPEED = 480;
@@ -139,6 +141,12 @@ scene("start", () => {
         pos(width() / 2, height() / 2 - 80),
         scale(2),
         origin("center"),
+    ]);
+
+    add([
+        text(VERSION),
+        pos(width() -200, height()- 100),
+        scale(0.5)
     ]);
 
     add([

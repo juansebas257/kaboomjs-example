@@ -2691,6 +2691,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
   ao({
     background: [0, 100, 150]
   });
+  var VERSION = "1.0.5";
   var FLOOR_HEIGHT = 48;
   var JUMP_FORCE = 800;
   var SPEED = 480;
@@ -2754,6 +2755,11 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
         bunny.jump(JUMP_FORCE);
       }
     });
+    onTouchStart(() => {
+      if (bunny.isGrounded()) {
+        bunny.jump(JUMP_FORCE);
+      }
+    });
     const scoreLabel = add([
       text(`Score: ${score}`),
       pos(24, 24)
@@ -2771,7 +2777,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       origin("center")
     ]);
     add([
-      text(`Press "space" to restart`),
+      text(`Press "space" or "click" to restart`),
       pos(width() / 2, height() / 2 + 80),
       origin("center"),
       scale(0.5)
@@ -2786,6 +2792,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       go("game");
     });
     onClick(() => go("game"));
+    onTouchStart(() => go("game"));
   });
   scene("start", () => {
     add([
@@ -2793,6 +2800,11 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       pos(width() / 2, height() / 2 - 80),
       scale(2),
       origin("center")
+    ]);
+    add([
+      text(VERSION),
+      pos(width() - 200, height() - 100),
+      scale(0.5)
     ]);
     add([
       text("testing game by juansebas257"),
@@ -2810,6 +2822,9 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       go("game");
     });
     onClick(() => {
+      go("game");
+    });
+    onTouchStart(() => {
       go("game");
     });
   });
