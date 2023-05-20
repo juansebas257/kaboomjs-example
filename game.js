@@ -28,7 +28,7 @@ scene("game", () => {
         color(220, 220, 220),
     ]);
 
-    // add platform
+    // add platform (ground)
     add([
         rect(width(), FLOOR_HEIGHT),
         pos(0, height() - FLOOR_HEIGHT),
