@@ -82,6 +82,12 @@ scene("game", () => {
         }
     });
 
+    onTouchStart(() => {
+        if (bunny.isGrounded()) {
+            bunny.jump(JUMP_FORCE);
+        }
+    });
+
     //score section
     const scoreLabel = add([
         text(`Score: ${score}`),
@@ -122,7 +128,9 @@ scene("lose", () => {
         go("game");
     });
 
-    onClick(() => go("game"))
+    onClick(() => go("game"));
+
+    onTouchStart(() => go("game"));
 });
 
 scene("start", () => {
@@ -154,6 +162,10 @@ scene("start", () => {
     });
 
     onClick(() => {
+        go("game");
+    });
+
+    onTouchStart(() => {
         go("game");
     });
 });
