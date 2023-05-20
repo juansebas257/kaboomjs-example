@@ -1,0 +1,18 @@
+{
+  "name": "kaboomjs-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "esbuild game.js --bundle > build.js",
+    "start": "http-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sebastián Jiménez",
+  "license": "ISC",
+  "dependencies": {
+    "esbuild": "^0.17.19",
+    "http-server": "^14.1.1",
+    "kaboom": "^2000.2.10"
+  }
+}
