@@ -76,6 +76,12 @@ scene("game", () => {
         }
     });
 
+    onClick(() => {
+        if (bunny.isGrounded()) {
+            bunny.jump(JUMP_FORCE);
+        }
+    });
+
     //score section
     const scoreLabel = add([
         text(`Score: ${score}`),
@@ -97,7 +103,7 @@ scene("lose", () => {
     ]);
 
     add([
-        text(`Press "space" to restart`),
+        text(`Press "space" or "click" to restart`),
         pos(width() / 2, height() / 2 + 80),
         origin("center"),
         scale(0.5),
@@ -115,6 +121,8 @@ scene("lose", () => {
     onKeyPress("space", () => {
         go("game");
     });
+
+    onClick(() => go("game"))
 });
 
 scene("start", () => {
@@ -133,7 +141,7 @@ scene("start", () => {
     ]);
 
     add([
-        text(`Press "space" to start`),
+        text(`Press "space" or "click" to start`),
         pos(width() / 2, height() / 2 + 80),
         scale(0.5),
         origin("center"),
@@ -142,6 +150,10 @@ scene("start", () => {
 
     //keymaps
     onKeyPress("space", () => {
+        go("game");
+    });
+
+    onClick(() => {
         go("game");
     });
 });

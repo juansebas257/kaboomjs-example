@@ -2749,6 +2749,11 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
         bunny.jump(JUMP_FORCE);
       }
     });
+    onClick(() => {
+      if (bunny.isGrounded()) {
+        bunny.jump(JUMP_FORCE);
+      }
+    });
     const scoreLabel = add([
       text(`Score: ${score}`),
       pos(24, 24)
@@ -2780,6 +2785,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     onKeyPress("space", () => {
       go("game");
     });
+    onClick(() => go("game"));
   });
   scene("start", () => {
     add([
@@ -2795,12 +2801,15 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       origin("center")
     ]);
     add([
-      text(`Press "space" to start`),
+      text(`Press "space" or "click" to start`),
       pos(width() / 2, height() / 2 + 80),
       scale(0.5),
       origin("center")
     ]);
     onKeyPress("space", () => {
+      go("game");
+    });
+    onClick(() => {
       go("game");
     });
   });
